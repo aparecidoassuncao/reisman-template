@@ -1,0 +1,504 @@
+.rateit .rateit-range,
+.rateit button.rateit-reset {
+    display: inline-block;
+    vertical-align: middle;
+    height: 16px;
+    outline: 0
+}
+
+.rateit {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none
+}
+
+.rateit .rateit-range {
+    position: relative;
+    background: url(https://assets.betalabs.net/production/reisman/images/stores/1/star.png)
+}
+
+.rateit .rateit-range * {
+    display: block
+}
+
+* html .rateit,
+* html .rateit .rateit-range {
+    display: inline
+}
+
+.rateit .rateit-hover,
+.rateit .rateit-selected {
+    position: absolute;
+    left: 0
+}
+
+.rateit .rateit-hover-rtl,
+.rateit .rateit-selected-rtl {
+    left: auto;
+    right: 0
+}
+
+.rateit .rateit-hover {
+    background: url(https://assets.betalabs.net/production/reisman/images/stores/1/star.png) left -32px
+}
+
+.rateit .rateit-hover-rtl {
+    background-position: right -32px
+}
+
+.rateit .rateit-selected {
+    background: url(https://assets.betalabs.net/production/reisman/images/stores/1/star.png) left -32px
+}
+
+.rateit .rateit-selected-rtl {
+    background-position: right -32px
+}
+
+.rateit .rateit-preset,
+.rateit .rateit-preset-rtl {
+    background: url(https://assets.betalabs.net/production/reisman/images/stores/1/star.png) left -32px
+}
+
+.rateit button.rateit-reset {
+    width: 16px;
+    border: none;
+    margin: 0 5px 0 0;
+    padding: 0
+}
+
+.content-rating,
+.content-rating .box-evaluation,
+.content-rating .title-rating {
+    width: 100%;
+    vertical-align: top;
+    display: inline-block
+}
+
+.rateit button.rateit-reset:focus,
+.rateit button.rateit-reset:hover {
+    background-position: 0 -16px
+}
+
+div.bigstars div.rateit-range {
+    background: url(https://assets.betalabs.net/production/reisman/images/stores/1/star-g.png);
+    height: 26px
+}
+
+div.bigstars div.rateit-hover,
+div.bigstars div.rateit-selected {
+    background: url(https://assets.betalabs.net/production/reisman/images/stores/1/star-g.png) 0 -26px
+}
+
+.content-rating {
+    margin: 0
+}
+
+.content-rating .title-rating {
+    margin: 20px 0 30px;
+    font-size: 3.4rem;
+    font-weight: 400;
+    font-family: Lato, Arial, sans-serif;
+    color: #000;
+    text-align: center
+}
+
+@media screen and (max-width:768px) {
+    .content-rating .title-rating {
+        font-size: 2.5rem
+    }
+}
+
+.content-rating .box-evaluation {
+    margin: 0;
+    background-color: #fff
+}
+
+.content-rating .box-evaluation>div {
+    float: left;
+    width: 50%
+}
+
+.content-rating .box-evaluation .box-lf {
+    width: 50%
+}
+
+@media screen and (max-width:1024px) {
+    .content-rating .box-evaluation .box-lf {
+        border-right: none;
+        border-bottom: 1px solid #eee
+    }
+}
+
+.content-rating .box-evaluation .box-lf ul {
+    display: inline-grid;
+    vertical-align: top;
+    width: 100%;
+    margin: 0;
+    padding: 20px
+}
+
+.content-rating .box-evaluation .box-lf ul li {
+    vertical-align: top;
+    width: 100%;
+    margin: 5px 0;
+    list-style-type: none;
+    padding-bottom: 15px
+}
+
+.content-rating .box-evaluation .box-lf ul li .box-level {
+    vertical-align: middle;
+    padding: 0 10px 0 0;
+    float: left;
+    width: 41.66667%
+}
+
+@media screen and (max-width:600px) {
+    .content-rating .box-evaluation .box-lf ul li .box-level {
+        padding-right: 0
+    }
+}
+
+.content-rating .box-evaluation .box-lf ul li .box-level span {
+    display: inline-block;
+    vertical-align: top;
+    margin: 2px 0 0;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: Hind;
+    text-transform: uppercase;
+    color: #666
+}
+
+.content-rating .box-evaluation .box-lf ul li .box-numbers {
+    vertical-align: middle;
+    display: -webkit-box;
+    width: 58.33333%;
+    float: right
+}
+
+.content-rating .box-evaluation .box-lf ul li .box-star {
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0
+}
+
+.content-rating .box-evaluation .box-lf ul li .box-percentage {
+    position: relative;
+    vertical-align: middle;
+    height: 25px;
+    border: 1px solid #ffdeba;
+    background: #fff;
+    width: 75%;
+    float: left
+}
+
+.content-rating .box-evaluation .box-lf ul li .box-percentage span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #fe8c11
+}
+
+.content-rating .box-evaluation .box-lf ul li .lbl-percentage {
+    vertical-align: middle;
+    font-size: 1rem;
+    font-family: Hind;
+    width: 25%;
+    text-align: right;
+    color: #4c4c4c;
+    position: relative;
+    top: 5px
+}
+
+.content-rating .general-evaluation {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    border-bottom: 1px solid #eaeaea;
+    background-color: #fff
+}
+
+.content-rating .general-evaluation .title-general {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 0 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #CAA68C
+}
+
+@media screen and (max-width:520px) {
+    .content-rating .general-evaluation .title-general {
+        width: 100%;
+        margin-top: 5px;
+        margin-left: 0
+    }
+}
+
+.content-rating .box-form {
+    position: relative;
+    padding: 7px 20px 20px;
+    margin-top: 26px
+}
+
+.content-rating .box-form .comment-blocked {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 106%;
+    background-color: rgba(0, 0, 0, .6)
+}
+
+.content-rating .box-form .comment-blocked .login {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: inline-block;
+    width: 100%;
+    text-align: center
+}
+
+.content-rating .box-form .comment-blocked a[identificacao] {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    background: #565656;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer
+}
+
+.content-rating .box-form .comment-blocked a[identificacao]:hover {
+    opacity: .7
+}
+
+.content-rating .content-comment {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    margin: 0;
+    font-family: Lato, Arial, sans-serif
+}
+
+.content-rating .content-comment .box-comment {
+    float: left;
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee
+}
+
+.content-rating .content-comment .box-comment>div {
+    float: left;
+    padding-top: 7px
+}
+
+.content-rating .content-comment .box-comment .user-img {
+    margin: 0
+}
+
+.content-rating .content-comment .box-comment .user-img .img {
+    width: 100%;
+    padding-top: 100%
+}
+
+.content-rating .content-comment .box-comment .box-name {
+    padding-left: 15px;
+    padding-right: 10px
+}
+
+@media screen and (max-width:768px) {
+    .content-rating .content-comment .box-comment .box-name {
+        padding-right: 0
+    }
+}
+
+.content-rating .content-comment .box-comment .box-name .rateit,
+.content-rating .content-comment .box-comment .box-name h3,
+.content-rating .content-comment .box-comment .box-name p {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    margin: 0;
+    font-weight: 700;
+    line-height: 1
+}
+
+.content-rating .content-comment .box-comment .box-name .name {
+    font-size: 1.8rem;
+    text-transform: uppercase
+}
+
+.content-rating .content-comment .box-comment .box-name .date {
+    font-size: 1.3rem;
+    color: #aaa;
+    margin-bottom: 10px
+}
+
+.content-rating .content-comment .box-comment .comment {
+    min-height: 100px;
+    border-left: 1px solid #eee;
+    padding: 7px 15px
+}
+
+@media screen and (max-width:768px) {
+    .content-rating .content-comment .box-comment .comment {
+        clear: left;
+        padding-top: 20px;
+        padding-left: 0;
+        border-left: none
+    }
+}
+
+.content-rating .content-comment .box-comment .comment h4 {
+    width: 100%;
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 400
+}
+
+.content-rating .content-comment .box-comment .box-like {
+    padding-left: 15px;
+    text-align: center
+}
+
+@media screen and (max-width:520px) {
+    .content-rating .content-comment .box-comment .comment {
+        padding-right: 0;
+        border-right: none
+    }
+    .content-rating .content-comment .box-comment .box-like {
+        padding-left: 0
+    }
+}
+
+.content-rating .content-comment .box-comment .box-like span {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    margin: 0 0 10px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #777
+}
+
+.content-rating .content-comment .box-comment .box-like .btn-like {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 0 5px;
+    padding: 1px 4px 1px 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #16911a;
+    border: 1px solid #ddd;
+    background-color: #f3f3f3;
+    background-position: 5px center;
+    background-repeat: no-repeat
+}
+
+.content-rating .content-comment .box-comment .box-like .btn-like.unlike {
+    color: #d10000
+}
+
+#formulario-avaliacao {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    margin: 0
+}
+
+#formulario-avaliacao .title {
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #d9b162;
+    font-weight: 700;
+    border: none!important;
+    margin: 0;
+    padding: 0;
+    line-height: 26px;
+    margin-top: 4px;
+}
+
+#formulario-avaliacao .box-rating,
+#formulario-avaliacao .box-text {
+    display: inline-block
+}
+
+#formulario-avaliacao .box-rating {
+    width: auto;
+    vertical-align: middle;
+    margin-left: 10px
+}
+
+#formulario-avaliacao .box-rating #NewRating {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0
+}
+
+#formulario-avaliacao .box-text {
+    width: 100%
+}
+
+#formulario-avaliacao .textarea {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    max-width: 100%;
+    height: 155px;
+    margin: 20px 0 0;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #eee;
+    box-shadow: none;
+    background: #fff
+}
+
+#formulario-avaliacao .btn-secondary {
+    margin-top: 10px;
+    border-radius: 2px;
+    background-color: #a7a7a7;
+    border-color: #a7a7a7;
+}
+
+#formulario-avaliacao .btn_sucess {
+    float: right;
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
+    height: 36px;
+    margin: 10px 0 0;
+    padding: 0 20px;
+    font-size: 1rem;
+    line-height: 36px;
+    font-weight: 700;
+    color: #FFF;
+    text-align: center;
+    border: none;
+    background: #d9b162;
+    cursor: pointer;
+    border-radius: 2px;
+}
+@media screen and (max-width:768px) {
+    .content-rating .box-evaluation>div, .content-rating .box-evaluation .box-lf, .content-rating .box-evaluation .box-lf ul li .box-level, .content-rating .box-evaluation .box-lf ul li .box-numbers{
+        width: 100%;
+    }
+}
