@@ -178,24 +178,27 @@
                     <img src="{{ path('chevron-down-rodape.png') }}">
                 </button>
                 <div class="context-dados">
-
                     @if($infosfooter->records->count() > 0)
-                        @foreach($infosfooter->records as $infof)  
-                            @if($infof->whatsapp != null)
-                                <div class="div-footer-atendimento">
-                                    <a href="" target="_blank" id="a-whats">
-                                    <img src="{{ path('icon-whatsapp.svg') }}"> <span id="n-whats">{{ $infof->whatsapp->values->first->value->value }}</span>
-                                    </a>
-                                </div>
-                            
-                            @endif
+                        @foreach($infosfooter->records as $infof) 
+                
                             @if($infof->telefone != null)
-                                <div class="div-footer-atendimento">
-                                    <a href="/contato">
-                                    <img src="{{ path('icon-atendimento.svg') }}"> {{ $infof->telefone->values->first->value->value }}
+                                <div class="div-footer-atendimento" style="display: block; width: 100%; margin-bottom: 10px;">
+                                    <a href="tel:{{ $infof->telefone->values->first->value->value }}">
+                                        <img src="{{ path('icon-atendimento.svg') }}"> 
+                                        {{ $infof->telefone->values->first->value->value }}
                                     </a>
                                 </div>
                             @endif
+                
+                            @if($infof->whatsapp != null)
+                                <div class="div-footer-atendimento" style="display: block; width: 100%;">
+                                    <a href="https://api.whatsapp.com/send?phone={{ $infof->whatsapp->values->first->value->value }}" target="_blank" id="a-whats">
+                                        <img src="{{ path('icon-whatsapp.svg') }}"> 
+                                        <span id="n-whats">{{ $infof->whatsapp->values->first->value->value }}</span>
+                                    </a>
+                                </div>
+                            @endif
+                
                         @endforeach    
                     @endif    
                 </div>
@@ -267,9 +270,6 @@
                 <li>
                     <a href="/politica-de-privacidade">Termos de uso</a>
                 </li>
-                <li>
-                    <a href="/politica-de-privacidade" >Preferências de cookies</a>
-                </li>
             </ul>
         </div>
     </div>
@@ -278,7 +278,7 @@
             <img src="{{ path('logo-novo-branco.svg') }}">
         </div>
         <div class="dados-shop">
-            <span class="span-copyright">© 2025, reisman Todos os direitos reservados CNPJ: 10.423.979/0001-64</span>
+            <span class="span-copyright">© 2026, REISMAN TODOS OS DIREITOS RESERVADOS CNPJ: 10.423.979/0001-64</span>
         </div>
         <div class="design-by">
             <a href="#">
