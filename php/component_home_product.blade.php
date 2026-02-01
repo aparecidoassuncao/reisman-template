@@ -78,6 +78,8 @@
     {{ $itemFavorito->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label }}
 @endif"
     data-imagens-second="{{ $itemFavorito->extraFields->get('imagem_produto_02')->values->first()->source }}"
+    data-price-vista="{{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $itemFavorito->extraFields->get('valor_base')->values->first()->value)[1])) }}"
+    data-price-parcelament="{{ explode(' ou ', $itemFavorito->extraFields->get('valor_base')->values->first()->value)[0] }}"
     data-price="@if($itemFavorito->extraFields->has('valor_base')) {{ $itemFavorito->extraFields->get('valor_base')->values->first()->value }} @else 10x R$ {{ number_format($itemFavorito->prices->first()->price / 10, 2, ',', '.') }} @endif">
     <div
         class="imageItem {{ ltrim(str_replace(['-18k', 'ouro'], ['', ''], str_replace(' ', '-', strtolower($itemFavorito->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label))), '-') }}">
@@ -133,6 +135,8 @@
 "
     data-name="{{ $value->record->identification->first()->name }}"
     data-nameColor="{{ $value->record->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label }}"
+    data-price-vista="{{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[1])) }}"
+    data-price-parcelament="{{ explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[0] }}"
     data-price="{{ $value->record->extraFields->get('valor_base')->values->first()->value  }}">
     <div
         class="imageItem {{ str_replace(['-18k', 'ouro-'], ['', ''], str_replace(' ', '-', strtolower($value->record->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label))) }} ">
@@ -190,6 +194,8 @@
     data-url="{{ url($value->record->urls->first()->url) }}"
     data-name="{{ $value->record->identification->first()->name }}"
      data-nameColor="{{ $value->record->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label }}"
+         data-price-vista="{{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[1])) }}"
+    data-price-parcelament="{{ explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[0] }}"
     data-price="{{ $value->record->extraFields->get('valor_base')->values->first()->value  }}">
     
     <div
@@ -245,6 +251,8 @@
     data-url="{{ url($value->record->urls->first()->url) }}"
     data-name="{{ $value->record->identification->first()->name }}"
      data-nameColor="{{ $value->record->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label }}"
+         data-price-vista="{{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[1])) }}"
+    data-price-parcelament="{{ explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[0] }}"
     data-price="{{ $value->record->extraFields->get('valor_base')->values->first()->value  }}">
     <div
         class="imageItem {{ str_replace(['-18k', 'ouro-'], ['', ''], str_replace(' ', '-', strtolower($value->record->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label))) }} ">
@@ -277,9 +285,24 @@
                                     </span>
                                 </div>
                                 
-                                <div class="preco-produto-spot1" style="color: #727272; font-size: 14px;">
+                                 <div class="preco-produto-spot-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                    <meta itemprop="priceCurrency" content="BRL">
+
+                                  
+
                                     @if($itemFavorito->extraFields->has('valor_base'))
-                                    {{ $itemFavorito->extraFields->get('valor_base')->values->first()->value }}
+                       
+                                        <span class="price-main">
+                                            <span class="currency">R$</span>
+                                            <span class="value" itemprop="price">
+                                                {{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $itemFavorito->extraFields->get('valor_base')->values->first()->value)[1])) }}
+                                            </span>
+                                            <span class="currency-text">no pix</span>
+                                        </span>
+                                    <p class="price-installment">
+                                       ou em <span class="parcelament">{{ explode(' ou ', $itemFavorito->extraFields->get('valor_base')->values->first()->value)[0] }}</span> no cartão
+                                    </p>
+                                    
                                     @else
                                     10x R$ {{ number_format($itemFavorito->prices->first()->price / 10, 2, ',', '.') }}
                                     @endif

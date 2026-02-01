@@ -3,6 +3,8 @@
                                 <figure class="img-card image -vertical">
                                      @include(@engine_view('component_flag_categoria'))
                                     <img class="principal"
+                                   width="300"
+                                  height="400"
                                         @if($item->extraFields->has('thumb_produto'))
                                     src="https://assets.betalabs.net/production/reisman/{{ $item->extraFields->get('thumb_produto')->values->first->source->file_path }}"
                                     @else
@@ -64,6 +66,8 @@
 @else
 @if($item->extraFields->has('thumb_produto')) https://assets.betalabs.net/production/reisman/{{ $item->extraFields->get('thumb_produto')->values->first->source->file_path }} @else {{ thumb($item->main_image->source) }} @endif
 @endif"
+data-price-vista="{{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $item->extraFields->get('valor_base')->values->first()->value)[1])) }}"
+    data-price-parcelament="{{ explode(' ou ', $item->extraFields->get('valor_base')->values->first()->value)[0] }}"
     data-price="@if($item->extraFields->has('valor_base')) {{ $item->extraFields->get('valor_base')->values->first()->value }} @else 10x R$ {{ number_format($item->prices->first()->price / 10, 2, ',', '.') }} @endif">
     <div
         class="imageItem {{ ltrim(str_replace(['-18k', 'ouro'], ['', ''], str_replace(' ', '-', strtolower($item->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label))), '-') }}">
@@ -118,6 +122,8 @@
 @endif
 "
     data-name="{{ $value->record->identification->first()->name }}"
+        data-price-vista="{{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[1])) }}"
+    data-price-parcelament="{{ explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[0] }}"
     data-nameColor="{{ $value->record->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label }}"
     data-price="{{ $value->record->extraFields->get('valor_base')->values->first()->value  }}">
     <div
@@ -175,6 +181,8 @@
 
     data-url="{{ url($value->record->urls->first()->url) }}"
     data-name="{{ $value->record->identification->first()->name }}"
+        data-price-vista="{{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[1])) }}"
+    data-price-parcelament="{{ explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[0] }}"
      data-nameColor="{{ $value->record->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label }}"
     data-price="{{ $value->record->extraFields->get('valor_base')->values->first()->value  }}">
     
@@ -230,6 +238,8 @@
 "
     data-url="{{ url($value->record->urls->first()->url) }}"
     data-name="{{ $value->record->identification->first()->name }}"
+        data-price-vista="{{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[1])) }}"
+    data-price-parcelament="{{ explode(' ou ', $value->record->extraFields->get('valor_base')->values->first()->value)[0] }}"
      data-nameColor="{{ $value->record->extraFields->get('selecionar_cor_do_ouro')->values->first()->extraFieldOption->label }}"
     data-price="{{ $value->record->extraFields->get('valor_base')->values->first()->value  }}">
     <div
@@ -264,39 +274,26 @@
                                     </span>
                                 </div>
                                 
-                                <div class="preco-produto-spot1">
-                                    @if($item->extraFields->has('valor_base') && strpos($item->extraFields->get('valor_base')->values->first()->value, ' ou ') !== false)
-                                        
-                                        <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1; margin-top: 10px; font-family: 'Spectral', serif;">
-                                            
-                                            <div style="color: #555; display: flex; align-items: baseline;">
-                                                {{-- R$ --}}
-                                                <span style="font-size: 18px; font-weight: 600; margin-right: 1px; color: #2C9E16;">R$</span>
-                                                
-                                                {{-- Valor Grande --}}
-                                                <span style="font-size: 19px; font-weight: 600; color: #2C9E16;">
-                                                    {{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $item->extraFields->get('valor_base')->values->first()->value)[1])) }}
-                                                </span>
-                                                
-                                                {{-- NO PIX --}}
-                                                <span style="font-size: 14,5px; letter-spacing: 1px; margin-left: 8px; color: #2C9E16; font-weight: 400;">no pix</span>
-                                            </div>
+                                 <div class="preco-produto-spot-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                    <meta itemprop="priceCurrency" content="BRL">
 
-                                            {{-- Linha 2: Parcelamento --}}
-                                            <div style="font-size: 14px; color: #888; font-weight: 300; margin-top: 4px;">
-                                                ou em {{ explode(' ou ', $item->extraFields->get('valor_base')->values->first()->value)[0] }} no cartão
-                                            </div>
+                                  
 
-                                        </div>
-
+                                     @if($item->extraFields->has('valor_base'))
+                       
+                                        <span class="price-main">
+                                            <span class="currency">R$</span>
+                                            <span class="value" itemprop="price">
+                                                {{ trim(str_replace(['R$', ' à vista'], '', explode(' ou ', $item->extraFields->get('valor_base')->values->first()->value)[1])) }}
+                                            </span>
+                                            <span class="currency-text">no pix</span>
+                                        </span>
+                                    <p class="price-installment">
+                                       ou em <span class="parcelament">{{ explode(' ou ', $item->extraFields->get('valor_base')->values->first()->value)[0] }}</span> no cartão
+                                    </p>
+                                    
                                     @else
-                                        <div style="font-family: 'Spectral', serif; font-size: 18px; color: #666; margin-top: 10px;">
-                                            @if($item->extraFields->has('valor_base'))
-                                                {{ $item->extraFields->get('valor_base')->values->first()->value }}
-                                            @else
-                                                10x R$ {{ number_format($item->prices->first()->price / 10, 2, ',', '.') }}
-                                            @endif
-                                        </div>
+                                    10x R$ {{ number_format($item->prices->first()->price / 10, 2, ',', '.') }}
                                     @endif
                                 </div>
                             </div>
