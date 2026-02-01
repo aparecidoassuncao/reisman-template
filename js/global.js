@@ -76,8 +76,9 @@ receiveImgs.forEach((img) => {
     const productBlock = img.closest('.product-block');
     productBlock.querySelector('.img-card img').src = img.getAttribute('data-link');
     productBlock.querySelector('a').href = img.getAttribute('data-url');
-    productBlock.querySelector('.preco-produto-spot1').textContent = img.getAttribute('data-price');
-
+    // productBlock.querySelector('.preco-produto-spot1').textContent = img.getAttribute('data-price');
+    productBlock.querySelector('.preco-produto-spot-price  .price-main .value').textContent = img.getAttribute('data-price-vista');
+    productBlock.querySelector('.preco-produto-spot-price .price-installment').textContent = img.getAttribute('data-price-parcelament');
     // Pegar a cor do elemento ativo
     const activeItem = productBlock.querySelector('.outlineColorImage.active');
     const colorName = activeItem ? activeItem.textContent.trim() : ''; // Assumindo que o texto da cor está dentro do elemento
