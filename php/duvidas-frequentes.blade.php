@@ -2,54 +2,109 @@
 @section('conteudo')
 @section('title', 'Dúvidas frequentes')
 @section('metadescription', 'Dúvidas frequentes da nossa loja - Reisman ')
+
+@push('styles')
+<link rel="stylesheet" href="{{ stylesheet('page-custom.css') }}">
+@endpush
+
 @if($duvidasfrequentesproduto->records->count() > 0)
-  <div id="div-faq" style="padding-top: 30px">
-    <div class="title text-center">
-        <h1 style="font-size: 30px;">Dúvidas frequentes</h1>
+<div class="page-custom duvidas-frequentes">
+    
+    <div class="banner-page">
+        @desktop 
+             <img src="{{ path('banner-desktop-faq.png') }}" alt="Banner Desktop - Dúvidas frequentes da nossa loja - Reisman ">
+        @elsedesktop  
+             <img src="{{ path('banner-mobile-faq.png') }}" alt="Banner Mobile - Dúvidas frequentes da nossa loja - Reisman ">
+        @enddesktop
+       
     </div>
-    <div class="retangulo"></div>
-    <div id="div-perguntas">
-      @foreach($duvidasfrequentesproduto->records as $faq)
-        @if($faq->pergunta != null && $faq->resposta != null)
-        <div>
-          <h2 id="pergunta-{{ $faq->id }}" class="div-pergunta" style="all: unset; display: flex; align-items: center;">
-            {{ $faq->pergunta->values->first->value->value }}
-            <img src="{{ path('icon-plus-faq.svg') }}">
-          </h2>
-          <div id="resposta-{{ $faq->id }}" class="div-resposta hide">
+
+<section class="faq" itemscope itemtype="https://schema.org/FAQPage">
+  @foreach($duvidasfrequentesproduto->records as $faq)
+    @if($faq->pergunta && $faq->resposta)
+      <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="faq-context">
+
+        <h2 class="faq-question">
+          <button
+            id="pergunta-{{ $faq->id }}"
+            aria-expanded="false"
+            aria-controls="resposta-{{ $faq->id }}"
+          >
+            <span itemprop="name">
+              {{ $faq->pergunta->values->first->value->value }}
+            </span>
+         
+          </button>
+        </h2>
+
+        <div
+          id="resposta-{{ $faq->id }}"
+          class="faq-answer"
+          hidden
+          itemscope
+          itemprop="acceptedAnswer"
+          itemtype="https://schema.org/Answer"
+        >
+          <div itemprop="text" class="answer-faq" >
             {!! $faq->resposta->values->first->value->value !!}
-            @if($faq->imagem_resposta != null)
-            <div class="div-img-resposta">
-              <img src="https://assets.betalabs.net/production/reisman/{{ $faq->imagem_resposta->values->first->source->file_path }}">
-            </div>
-            @endif
           </div>
+
+          @if($faq->imagem_resposta)
+            <div class="div-img-resposta">
+              <img
+                src="https://assets.betalabs.net/production/reisman/{{ $faq->imagem_resposta->values->first->source->file_path }}"
+                alt="Ilustração da resposta"
+                loading="lazy"
+              >
+            </div>
+          @endif
         </div>
-        @endif
-      @endforeach
-    </div>
-  </div>
+
+      </div>
+    @endif
+  @endforeach
+</section>
+
+  @include(@engine_view('component_svg'))
+</div>  
 @endif
 
 @push('scripts')
 <script>
-    $('.div-pergunta').each(function(){
-        $(this).on('click', function(){
-            var numeroPergunta = $(this).attr('id').replace('pergunta-', '');
-            var perguntaCorrespondente = $('#resposta-'+numeroPergunta);
-            perguntaCorrespondente.toggleClass('hide');
-            if(perguntaCorrespondente.hasClass('hide')) {
-                $(this).find('img').attr('src', 'https://assets.betalabs.net/production/reisman/fonts/stores/1/icon-plus-faq.svg');
-                perguntaCorrespondente.css('border-bottom', 'none');
-                $(this).css('border-bottom', '1px solid #dededf');
-            } else {
-                $(this).find('img').attr('src', 'https://assets.betalabs.net/production/reisman/fonts/stores/1/icon-minus-faq.svg');
-                perguntaCorrespondente.css('border-bottom', '1px solid #dededf');
-                $(this).css('border-bottom', 'none');
-            }
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqButtons = document.querySelectorAll('.faq-question button');
+
+    faqButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        const answerId = button.getAttribute('aria-controls');
+        const answer = document.getElementById(answerId);
+        const wrapper = button.closest('[itemprop="mainEntity"]');
+
+        // Fecha todos
+        faqButtons.forEach(btn => {
+          btn.setAttribute('aria-expanded', 'false');
+
+          const id = btn.getAttribute('aria-controls');
+          const content = document.getElementById(id);
+          if (content) content.hidden = true;
+
+          const parent = btn.closest('[itemprop="mainEntity"]');
+          if (parent) parent.classList.remove('open');
         });
+
+        // Abre o clicado
+        if (!expanded) {
+          button.setAttribute('aria-expanded', 'true');
+          answer.hidden = false;
+          if (wrapper) wrapper.classList.add('open');
+        }
+      });
     });
+  });
 </script>
+
+
 @endpush
 
 @endsection

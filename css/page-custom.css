@@ -1,0 +1,72 @@
+.page-custom.duvidas-frequentes .banner-page img{
+    width: 100%;
+}
+
+.page-custom.duvidas-frequentes .banner-page{
+    margin-bottom: 104px;
+}
+
+
+.page-custom.duvidas-frequentes section.faq{
+        max-width: 840px;
+    margin: auto;
+}
+.page-custom.duvidas-frequentes .faq h2.faq-question button span{
+
+}
+.page-custom.duvidas-frequentes .faq h2.faq-question{
+
+        line-height: 0;
+    margin: 0;
+    padding: 0 !important;
+  
+}
+.page-custom.duvidas-frequentes .faq h2.faq-question button{
+        background: transparent;
+              letter-spacing: 4px ;
+    font-weight: 400 ;
+    color: #1E1613 ;
+    text-align: left;
+        font-size: 14px ;
+     line-height: 20px;
+    text-transform: uppercase ;
+    font-family: "Magnificent", sans-serif !important;
+}
+.page-custom.duvidas-frequentes .faq .faq-context{
+    margin-bottom: 24px;
+}
+
+.page-custom.duvidas-frequentes .faq .faq-answer{
+    margin-top: 24px;
+}
+
+.page-custom.duvidas-frequentes .faq .answer-faq > div{
+        color: #727272 !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    font-family: Spectral, serif !important;
+}
+
+.page-custom.duvidas-frequentes section.faq{
+       padding-left: 24px;
+       padding-right: 24px;
+}
+
+@media screen and (min-width: 992px){
+    .page-custom.duvidas-frequentes section.faq{
+        padding: 0;
+    }
+    .page-custom.duvidas-frequentes .faq h2.faq-question button{
+        font-size: 20px;
+    }
+    .page-custom.duvidas-frequentes .faq .faq-context{
+        margin-bottom: 64px;
+    }
+}
+
+@media screen and (max-width: 767px){
+   .page-custom.duvidas-frequentes .banner-page{
+       margin-bottom: 69px;
+   } 
+   
+}
