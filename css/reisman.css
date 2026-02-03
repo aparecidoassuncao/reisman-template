@@ -6784,7 +6784,7 @@ ol li a, ol li a:hover {
     padding: 10px;
   }
   #desc-categoria {
-    padding: 1rem 10% 0;
+    padding: 0rem 10% 0;
   }
   .slider-blog a {
     padding: 0 3px;
@@ -7111,7 +7111,7 @@ a:hover {
 }
 
 #desc-categoria {
-  font-size: 15px;
+  font-size: 14px;
   opacity: 0.5;
   color: #000;
 }
@@ -15137,7 +15137,6 @@ header .aside-box .item.search {
 .product-block .description .preco-produto-spot .last::after, .product-block .description .preco-produto-spot1 .last::after {
   color: #727272 !important;
   content: "no pix" !important;
-  text-transform: uppercase !important;
   font-size: 11px !important;
   font-weight: 400 !important;
 }
@@ -15633,9 +15632,11 @@ ol.breadcrumb-new li::before {
 }
 
 div#title-categoria h1 {
-  font-size: 23px;
+  font-size: 32px;
   color: #000;
+  letter-spacing: 5px;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .product-block .img-card:hover img:nth-child(1) {
@@ -15823,4 +15824,50 @@ div#div-faq .title {
 }
 .fullbanner{
     height: 100vh;
+}
+.preco-produto-spot-price span.price-main {
+    color: #727272;
+    display: inline-flex; 
+    align-items: baseline; 
+    height: 25px;          
+    padding: 0px 10px 0px 3px;
+    line-height: normal;
+}
+
+.preco-produto-spot-price span.price-main span.currency,
+.preco-produto-spot-price span.price-main span.value,
+.preco-produto-spot-price span.price-main .currency-text {
+    background-color: transparent !important; 
+    display: inline;
+}
+
+.preco-produto-spot-price span.price-main span.currency {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.preco-produto-spot-price span.price-main span.value {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.preco-produto-spot-price span.price-main .currency-text {
+    font-weight: 200;
+    letter-spacing: 1px;
+    margin-left: 4px;
+    font-size: 12px;
+    background-color: transparent !important;
+    display: inline-block;
+}
+
+body.page-categoria .retangulo {
+    display: none;
+}
+
+.preco-produto-spot-price .price-installment{
+      font-size: 14px;
+    color: #888;
+    font-weight: 300;
+    margin-top: -2px;
+    margin-bottom: 0 !important;
 }
