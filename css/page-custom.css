@@ -70,3 +70,32 @@
    } 
    
 }
+.page-abouts .banner-bloco-01 img{
+    width: 100%;
+}
+
+.page-abouts .banner-bloco-01 .context-text{
+    position: absolute;
+    z-index: 1;
+    top: auto;
+    width: 100%;
+    bottom: 140px;
+    left: 67px;
+    text-align: left;
+}
+
+.page-abouts .banner-bloco-01 .context-text h2{
+    font-size: 39px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-family: "Magnificent", sans-serif;
+}
+
+.page-abouts .banner-bloco-01 .context-text p{
+    margin: 0;
+    font-size: 24.62px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
