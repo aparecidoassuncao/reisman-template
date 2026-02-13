@@ -18,7 +18,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -46,7 +46,7 @@
 
         ::selection { background: var(--black); color: var(--white); }
         html { scroll-behavior: smooth; }
-        body { background-color: var(--bg-warm); color: var(--gray-dark); font-family: 'Spectral', sans-serif; overflow-x: hidden; margin: 0; padding: 0; }
+        body { background-color: var(--bg-warm); color: var(--gray-dark); font-family: 'Spectral', serif; overflow-x: hidden; margin: 0; padding: 0; }
         
         header, .header, footer, .footer, .topbar-new, .menu-mobile-aside { display: none !important; }
         
@@ -68,7 +68,22 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
             opacity: 0.15; pointer-events: none;
         }
-        .video-background-iframe { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; pointer-events: none; transform: translate(-50%, -50%) scale(1.5); object-fit: cover; opacity: 0.8; }
+        .video-background-iframe { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: 177.77vh; height: 100vh; /* Default: Height-based (Portrait/Mobile) */
+            pointer-events: none; opacity: 0.8; filter: grayscale(100%); 
+        }
+        @media (min-aspect-ratio: 16/9) {
+            .video-background-iframe { width: 100vw; height: 56.25vw; } /* Width-based (Landscape/Desktop) */
+        }
+        .video-poster {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 5; pointer-events: none;
+            filter: grayscale(100%); opacity: 0.8;
+            transform: scale(1.1);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+        }
+        .video-poster.hidden { opacity: 0; transform: scale(1); }
 
         .scroll-down-indicator {
             position: absolute; bottom: 30px; left: 25%; transform: translateX(-50%);
@@ -79,16 +94,17 @@
         @keyframes bounceArrow { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
 
         /* --- MEASURE SECTION & TRIGGER --- */
-        .measure-full-section { background-color: var(--bg-warm); padding: 120px 0; position: relative; border-top: 1px solid rgba(0,0,0,0.05); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .measure-wrapper { display: flex; align-items: center; justify-content: center; gap: 100px; max-width: 1000px; margin: 0 auto; padding: 0 40px; }
-        .measure-text-col { flex: 1; max-width: 450px; text-align: left; }
-        .measure-video-col { flex: 0 0 340px; width: 100%; position: relative; }
+        .measure-full-section { background-color: var(--white); padding: 0; position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+        .measure-wrapper { display: flex; align-items: stretch; justify-content: flex-start; gap: 0; max-width: none; margin: 0; padding: 0; position: relative; z-index: 1; width: 100%; height: 100vh; }
+        .measure-text-col { flex: 0 0 50%; max-width: 50%; display: flex; flex-direction: column; justify-content: center; padding: 80px 8%; background: var(--white); position: relative; z-index: 2; }
+        .measure-image-col { flex: 0 0 50%; max-width: 50%; position: relative; padding: 0; overflow: hidden; }
+        .measure-full-img { width: 100%; height: 100%; object-fit: cover; display: block; }
         
         .measure-photo-frame {
             position: relative; padding-bottom: 160%; width: 100%; height: 0;
             background: #f0f0f0; overflow: hidden; border-radius: 2px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            transform: rotate(-3deg); border: 10px solid var(--white);
+            transform: none; border: none;
         }
         .measure-photo-frame:hover { transform: rotate(0deg) scale(1.02) translateY(-5px); box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
         .measure-photo-img { 
@@ -124,12 +140,25 @@
             transition: 0.3s;
             margin-top: 5px;
             display: inline-block;
-            font-weight: 600;
+            font-weight: 100;
             text-decoration: none;
         }
         .btn-minimal-warranty:hover {
             background: var(--black);
             color: var(--white);
+            text-decoration: none;
+        }
+
+        .btn-gallery-cta {
+            background: transparent; border: 1px solid var(--black); color: var(--black);
+            padding: 15px 40px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;
+            cursor: pointer; transition: 0.3s; display: inline-block; font-weight: 600; text-decoration: none;
+            margin-top: 10px;
+        }
+        .btn-gallery-cta:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translateY(-2px);
             text-decoration: none;
         }
         
@@ -141,56 +170,29 @@
         .btn-video-link:hover { color: var(--black); border-color: var(--black); }
 
         /* --- EDITORIAL PARALLAX SECTION --- */
-        @property --gray-amount {
-            syntax: '<percentage>';
-            inherits: false;
-            initial-value: 100%;
+        .editorial-section { background-color: var(--bg-warm); padding: 0; position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; transition: background-color 2.5s ease; }
+        .editorial-section.romantic-mode { background-color: #fcf0f2; }
+        .editorial-wrapper { display: flex; align-items: stretch; width: 100%; height: 100vh; }
+        .editorial-text-col { flex: 0 0 50%; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; position: relative; z-index: 2; background: transparent; order: 2; }
+        .editorial-image-col { flex: 0 0 50%; position: relative; overflow: hidden; display: flex; gap: 20px; background: var(--black); padding: 0; align-items: flex-start; justify-content: center; order: 1; 
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
         }
         
-        .editorial-section {
-            background-color: var(--bg-warm);
-            padding: 140px 20px; position: relative; display: flex; align-items: center; justify-content: center;
-            overflow: hidden; min-height: 100vh;
-        }
-        .editorial-bg-mural {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-wrap: wrap; z-index: 0; opacity: 0.15; pointer-events: none;
-        }
-        .editorial-mural-img {
-            flex: 1 0 20%; height: 50%; object-fit: cover; filter: grayscale(100%);
-            opacity: 0;
-            --gray-amount: 100%;
-            transition: --gray-amount 2.5s ease;
-            animation: muralFadeIn 2s ease-out forwards, muralBreath 50s infinite alternate ease-in-out;
-            will-change: transform, opacity, filter;
-        }
+        /* Marquee Animation */
+        .gallery-marquee-col { flex: 1; display: flex; flex-direction: column; gap: 20px; will-change: transform; }
+        .gallery-marquee-col img { width: 100%; height: auto; object-fit: cover; display: block; filter: grayscale(100%); transition: 0.5s; opacity: 0.7; }
+        .gallery-marquee-col img:hover { filter: grayscale(0%); opacity: 1; }
         
-        /* Desincronizar animações para efeito orgânico */
-        .editorial-mural-img:nth-child(1) { animation-delay: 0s, 0s; }
-        .editorial-mural-img:nth-child(2) { animation-delay: 0.1s, -12s; }
-        .editorial-mural-img:nth-child(3) { animation-delay: 0.2s, -25s; }
-        .editorial-mural-img:nth-child(4) { animation-delay: 0.3s, -5s; }
-        .editorial-mural-img:nth-child(5) { animation-delay: 0.4s, -30s; }
-        .editorial-mural-img:nth-child(6) { animation-delay: 0.1s, -18s; }
-        .editorial-mural-img:nth-child(7) { animation-delay: 0.2s, -8s; }
-        .editorial-mural-img:nth-child(8) { animation-delay: 0.3s, -35s; }
-        .editorial-mural-img:nth-child(9) { animation-delay: 0.4s, -15s; }
-        .editorial-mural-img:nth-child(10) { animation-delay: 0.5s, -22s; }
+        .marquee-up { animation: marqueeUp 60s linear infinite; }
+        .marquee-down { animation: marqueeDown 60s linear infinite; }
         
-        @keyframes muralFadeIn { to { opacity: 1; } }
-        @keyframes muralBreath { 
-            from { transform: scale(1); filter: grayscale(var(--gray-amount)) blur(1.5px); } 
-            to { transform: scale(1.05); filter: grayscale(var(--gray-amount)) blur(0px); } 
-        }
-        
-        .editorial-overlay-box {
-            background: rgba(255, 255, 255, 0.96); padding: 60px 50px; max-width: 700px; text-align: center;
-            border: 1px solid var(--black); box-shadow: 0 20px 50px rgba(0,0,0,0.3); position: relative; z-index: 2;
-        }
-        .editorial-overlay-box::before {
-            content: ''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px;
-            border: 1px solid var(--gray-light); pointer-events: none;
-        }
+        @keyframes marqueeUp { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+        @keyframes marqueeDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+
+        .gallery-stats { margin-top: 35px; opacity: 0; transform: translateY(10px); transition: all 1s ease-out; }
+        .gallery-stats.visible { opacity: 1; transform: translateY(0); }
+        .gallery-counter { font-family: 'Spectral', serif; font-size: 2.5rem; color: var(--black); line-height: 1; font-style: italic; font-weight: 300; }
+        .gallery-label { font-family: 'Spectral', serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-med); display: block; margin-top: 5px; }
 
         /* --- FOOTER --- */
         .nav-footer { background: var(--black); color: var(--white); padding: 100px 0 60px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); display: block !important; }
@@ -231,13 +233,15 @@
         .video-audio-control i { font-size: 1rem; }
 
         /* --- CARE SECTION --- */
-        .care-section { background-color: var(--white); padding: 120px 0; position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .care-wrapper { display: flex; align-items: center; justify-content: center; gap: 80px; max-width: 1000px; margin: 0 auto; padding: 0 40px; }
-        .care-text-col { flex: 1; max-width: 450px; }
-        .care-image-col { flex: 0 0 340px; width: 100%; position: relative; }
+        .care-section { background-color: var(--bg-ice); padding: 0; position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+        .care-wrapper { display: flex; align-items: stretch; justify-content: flex-start; gap: 0; max-width: none; margin: 0; padding: 0; position: relative; z-index: 1; width: 100%; height: 100vh; }
+        .care-text-col { flex: 0 0 50%; max-width: 50%; display: flex; flex-direction: column; justify-content: center; padding: 80px 8%; position: relative; overflow: hidden; }
+        .care-image-col { flex: 0 0 50%; max-width: 50%; position: relative; padding: 0; overflow: hidden; }
+        
+        .care-full-img { width: 100%; height: 100%; object-fit: cover; display: block; }
         
         .care-photo-frame {
-            position: relative; padding-bottom: 160%; width: 100%; height: 0;
+            position: relative; padding-bottom: 150%; width: 100%; max-width: 450px; height: 0;
             background: #f0f0f0; overflow: hidden; border-radius: 2px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
             transform: rotate(3deg); border: 10px solid var(--white);
@@ -253,7 +257,7 @@
         .care-list-item { 
             display: flex; align-items: center; padding: 20px 30px; 
             cursor: pointer; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            color: var(--gray-med); font-family: 'Spectral', serif; font-size: 1.2rem;
+            color: #909090; font-family: 'Spectral', serif; font-size: 1.2rem;
             position: relative; background: transparent; border: none;
         }
         .care-list-item::before {
@@ -265,6 +269,15 @@
         .care-list-item.active::before { transform: scaleY(1); }
         
         .care-list-item span { font-weight: 400; letter-spacing: 0.5px; }
+        
+        .care-watermark {
+            position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);
+            font-family: 'Spectral', serif; font-size: 13vw; color: var(--black); opacity: 0.025;
+            pointer-events: none; z-index: 0; font-style: italic; white-space: nowrap; line-height: 1;
+            user-select: none;
+        }
+        .care-mobile-photo { display: none; margin-top: 40px; }
+        .care-mobile-photo.reveal { transition: all 1.5s ease-out; }
 
         /* --- SCROLL DOTS --- */
         .scroll-dots-nav {
@@ -293,61 +306,128 @@
         .back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
         .back-to-top:hover { background: var(--white); color: var(--black); transform: translateY(-5px); }
 
+        /* --- AJUSTE SECTION OVERRIDES --- */
+        #ajuste .measure-text-col { text-align: left; }
+        #ajuste .measure-text-col span { color: var(--gray-med); }
+        #ajuste .measure-text-col h2 { color: var(--black); }
+        #ajuste .measure-text-col p { color: var(--gray-dark); }
+        #ajuste .care-watermark { color: var(--black); opacity: 0.03; }
+
+        #ajuste .care-tabs-list { align-items: flex-start; border-left: 1px solid var(--gray-light); border-top: none; padding-left: 0; margin-top: 40px; width: 100%; }
+        #ajuste .care-list-item { color: var(--gray-med); justify-content: flex-start; padding: 20px 30px; width: 100%; border-bottom: none; }
+        #ajuste .care-list-item::before { display: block; background: var(--black); }
+        #ajuste .care-list-item:hover { color: var(--black); background: transparent; padding-left: 35px; }
+
         @media (max-width: 768px) {
             .cert-vertical-paper { min-height: 500px; padding: 50px 30px; max-width: 90%; }
             .btn-intro { padding: 15px 20px; letter-spacing: 1px; }
             .nav-card { flex: 0 0 45%; max-width: 45%; } .nav-grid { padding: 0 10px; gap: 30px; }
-            .hero-full-split { height: 100vh; display: flex; flex-direction: column; }
+            .hero-full-split { height: 100vh; min-height: 100vh; display: flex; flex-direction: column; }
             
             /* Mobile Linktree Layout */
-            .col-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; background: rgba(0,0,0,0.65); justify-content: center; align-items: center; text-align: center; padding: 60px 30px; box-shadow: none; }
+            .col-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0.85) 100%); justify-content: center; align-items: center; text-align: center; padding: 0 40px; box-shadow: none; }
             .hero-desktop-content { display: none; }
-            .mobile-linktree { display: flex !important; flex-direction: column; width: 100%; gap: 15px; margin-top: 20px; }
+            .mobile-linktree { display: flex !important; flex-direction: column; width: 100%; max-width: 340px; gap: 12px; margin: 0 auto; }
+            .mobile-footer-text { display: block !important; position: absolute; bottom: 60px; left: 0; width: 100%; text-align: center; padding-bottom: 10px; }
             
-            .logo-hero-img { width: 180px; margin: 0 auto 40px auto; filter: brightness(0) invert(1); opacity: 1; }
-            .col-video { display: block !important; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-            .video-background-iframe { transform: translate(-50%, -50%) scale(1.3); }
+            .logo-hero-img { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); width: 160px; margin: 0; filter: brightness(0) invert(1); opacity: 0.8; }
+            .col-video { display: block !important; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden; }
             .scroll-down-indicator { display: none; }
             .scroll-dots-nav { display: none; }
             
             .btn-minimal-warranty {
-                border-color: rgba(255,255,255,0.8);
+                border: 1px solid rgba(255,255,255,0.25);
+                border-left: 1px solid rgba(255,255,255,0.25);
                 color: var(--white);
-                background: rgba(255,255,255,0.05);
+                background: rgba(0, 0, 0, 0.35);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
                 margin-top: 0;
                 width: 100%;
-                display: block;
-                padding: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 16px 22px;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                text-align: center;
+                font-family: 'Spectral', serif;
+                font-size: 0.8rem;
+            }
+            .btn-minimal-warranty::after {
+                content: '\f054';
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                font-size: 0.7rem;
+                display: none;
             }
             .btn-minimal-warranty:hover {
-                background: var(--white);
-                color: var(--black);
+                background: rgba(255,255,255,0.15);
+                transform: translateX(5px);
+            }
+
+            /* Small Screens / Landscape Adjustment */
+            @media (max-height: 700px) {
+                .col-text { padding: 0 40px; }
+                .logo-hero-img { top: 20px; width: 150px; }
+                .mobile-linktree { gap: 8px; }
+                .btn-minimal-warranty { padding: 10px 15px; font-size: 0.75rem; }
             }
             
             /* Responsive Measure Section */
             .measure-wrapper { flex-direction: column; gap: 30px; }
-            .measure-text-col { text-align: center; order: 2; }
-            .measure-video-col { order: 1; flex: 0 0 auto; width: 70%; max-width: 300px; }
+            .measure-full-section { 
+                padding: 0; min-height: 100vh; 
+                background-image: url('https://assets.betalabs.net/production/reisman/extra_fields/272/phpknxenO1741809568.jpg?q=80&w=600&auto=format&fit=crop');
+                background-size: cover; background-position: center;
+            }
+            .measure-full-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 0; }
+            .measure-wrapper { flex-direction: column; gap: 0; height: auto; min-height: 100vh; justify-content: center; position: relative; z-index: 2; }
+            .measure-text-col { text-align: left; order: 1; flex: 0 0 100%; max-width: 100%; padding: 0 40px; background: transparent !important; }
+            .measure-image-col { display: none; }
+            
+            #ajuste .measure-text-col span { color: rgba(255,255,255,0.6) !important; }
+            #ajuste .measure-text-col h2 { color: var(--white) !important; }
+            #ajuste .measure-text-col p { color: rgba(255,255,255,0.8) !important; }
+            #ajuste .care-watermark { color: var(--white) !important; opacity: 0.015 !important; }
+            
+            #ajuste .care-mobile-photo { display: none !important; }
+            #ajuste .care-tabs-list { align-items: flex-start; border-left: none; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 50px; }
+            #ajuste .care-list-item { color: rgba(255,255,255,0.6); justify-content: flex-start; padding: 25px 0; border-bottom: 1px solid rgba(255,255,255,0.2); font-size: 1.1rem; }
+            #ajuste .care-list-item::before { display: none; }
+            #ajuste .care-list-item:hover { padding-left: 0; }
             .signature-svg { width: 120px; bottom: -25px; right: -20px; }
-            .measure-full-section { padding: 60px 0; }
 
             /* Responsive Care Section */
-            .care-section { padding: 60px 0; }
-            .care-wrapper { flex-direction: column; gap: 40px; }
-            .care-text-col { text-align: center; order: 1; }
+            .care-section { padding: 0; min-height: 100vh; height: auto; }
+            .care-wrapper { flex-direction: column; gap: 0; height: 100vh; min-height: 100vh; justify-content: center; }
+            .care-text-col { text-align: left; order: 1; flex: 0 0 100%; max-width: 100%; padding: 0 40px; display: flex; flex-direction: column; justify-content: center; }
+            .care-text-col h2 { font-size: 3.5rem !important; font-style: italic; font-weight: 300; margin-bottom: 30px !important; line-height: 1.1 !important; }
             .care-image-col { display: none; }
-            .care-tabs-list { border-left: none; border-top: 1px solid var(--gray-light); margin-top: 20px; }
-            .care-list-item { justify-content: center; padding: 15px; border-bottom: 1px solid var(--gray-light); }
+            .care-tabs-list { border-left: none; border-top: 1px solid var(--gray-light); margin-top: 50px; }
+            .care-list-item { justify-content: flex-start; padding: 25px 0; border-bottom: 1px solid var(--gray-light); font-size: 1.1rem; }
             .care-list-item::before { display: none; }
-            .care-list-item.active { padding-left: 15px; font-size: 1.2rem; }
+            .care-list-item.active { padding-left: 0; font-size: 1.2rem; }
+            
+            .care-watermark { font-size: 100vw; top: 50%; opacity: 0.015; transform: translate(-50%, -50%) rotate(-90deg); }
+            .care-mobile-photo { display: none !important; }
             
             .modal-paper { padding: 30px 20px; max-width: 90%; margin: 20px auto; max-height: 80vh; }
             .col-md-4 { flex: 0 0 50%; max-width: 50%; padding-left: 6px; padding-right: 6px; }
-            .editorial-section { padding: 80px 20px; }
-            .editorial-mural-img { flex: 1 0 50%; height: 20%; }
-            .editorial-overlay-box { padding: 40px 20px; }
-            .editorial-overlay-box h2, .measure-text-col h2 { font-size: 1.6rem !important; }
-            .editorial-overlay-box p, .measure-text-col p { font-size: 0.9rem !important; }
+            
+            /* Responsive Editorial Section */
+            .editorial-section { background-image: none; background-color: var(--bg-warm); }
+            .editorial-section::before { display: none; }
+            .editorial-wrapper { flex-direction: column; position: relative; z-index: 2; }
+            .editorial-text-col { flex: 0 0 100%; background: transparent; color: var(--black); padding: 0 40px; text-align: left; order: 1; }
+            .editorial-image-col { display: none; }
+            .editorial-text-col h2 { color: var(--black); font-size: 2.5rem !important; margin-bottom: 20px; }
+            .editorial-text-col p { color: var(--gray-dark); }
+            .btn-gallery-cta { border-color: var(--black); color: var(--black); }
+            .btn-gallery-cta:hover { background: var(--black); color: var(--white); }
+            .gallery-counter { font-size: 2rem; }
+            
+            .measure-text-col h2 { font-size: 3.5rem !important; font-style: italic; font-weight: 300; margin-bottom: 30px !important; line-height: 1.1 !important; }
             
             .row.justify-content-center { margin-left: -6px; margin-right: -6px; }
             .story-card-container { padding-bottom: 150%; }
@@ -363,8 +443,11 @@
     <div id="videoModal" class="modal-overlay">
         <div class="modal-content-wrapper" style="max-width: 800px;">
             <span class="close-modal-video" onclick="closeVideo()">× Fechar</span>
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; background: #000; overflow: hidden; border-radius: 8px;">
+            <div id="videoContainer" style="position: relative; padding-bottom: 56.25%; height: 0; background: #000; overflow: hidden; border-radius: 8px;">
                 <iframe id="videoFrame" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="video-audio-control" style="bottom: 20px; right: 20px;" onclick="toggleModalAudio(this)">
+                    <i class="fas fa-volume-mute"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -392,74 +475,47 @@
 
     <section id="hero" class="container-fluid hero-full-split p-0">
         <div class="row no-gutters split-row">
-            <div class="col-md-6 col-lg-8 col-text reveal">
+            <div class="col-md-6 col-lg-6 col-text reveal">
                 <div class="text-content-wrapper">
                     <img src="{{ path('logo-novo-preto.svg') }}" class="logo-hero-img" alt="Reisman">
                     
                     <div class="hero-desktop-content">
-                        <span style="letter-spacing: 2px; text-transform: uppercase; color: var(--gray-med); font-size: 0.8rem; display: block; margin-bottom: 10px; font-weight: 600;">Exclusive Access</span>
-                        <h1 class="hero-title font-serif">Você Acaba de Receber uma Autêntica Joia Reisman.</h1>
-                        <p style="font-size: 0.95rem; color: var(--gray-dark); line-height: 1.7; margin-bottom: 35px;">
-                            Mais do que somente ouro e pedras preciosas: você tem em mãos um símbolo de amor!
-                        </p>
+                        <span style="font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--gray-med); display: block; margin-bottom: 15px; font-weight: 600;">Exclusive Access</span>
+                        <h1 class="hero-title font-serif" style="font-style: italic; font-size: 3.5rem; margin-bottom: 30px;">Manual do Proprietário</h1>
                         <a href="/garantia" class="btn-minimal-warranty">Termos de Garantia</a>
                     </div>
 
                     <div class="mobile-linktree" style="display: none;">
-                        <a href="#galeria" class="btn-minimal-warranty">Galeria de Clientes</a>
                         <a href="#cuidados" class="btn-minimal-warranty">Manutenção & Cuidados</a>
                         <a href="#ajuste" class="btn-minimal-warranty">Ajuste & Medida</a>
-                        <a href="#colecoes" class="btn-minimal-warranty">Nossas Coleções</a>
+                        <a href="#galeria" class="btn-minimal-warranty">Galeria de Clientes</a>
                         <a href="/garantia" class="btn-minimal-warranty">Termos de Garantia</a>
+                    <div class="mobile-footer-text" style="display: none;">
+                        <span style="font-family: 'Montserrat', sans-serif; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.5); display: block; margin-bottom: 5px; font-weight: 500;">Exclusive Access</span>
+                        <span style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.7); font-weight: 600;">Manual do Proprietário</span>
+                    </div>
+                    
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 col-video reveal">
+            <div class="col-md-6 col-lg-6 col-video reveal">
                 <div class="video-blocker"></div>
-                <iframe class="video-background-iframe" src="https://www.youtube.com/embed/gi2RSiqsVGE?autoplay=1&mute=1&controls=0&loop=1&playlist=gi2RSiqsVGE&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=0&disablekb=1&playsinline=1&enablejsapi=1" title="Reisman Craftsmanship" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>
+                <img src="https://img.youtube.com/vi/UPvTA6fwKCw/maxresdefault.jpg" class="video-poster" alt="Reisman Craftsmanship">
+                <iframe class="video-background-iframe" src="https://www.youtube.com/embed/UPvTA6fwKCw?autoplay=1&mute=1&controls=0&loop=1&playlist=UPvTA6fwKCw&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=0&disablekb=1&playsinline=1&enablejsapi=1" title="Reisman Craftsmanship" allow="autoplay; encrypted-media" frameborder="0" allowfullscreen loading="eager"></iframe>
             </div>
-        </div>
-        <div class="video-audio-control" onclick="toggleHeroAudio(this)">
-            <i class="fas fa-volume-mute"></i>
         </div>
         <div class="scroll-down-indicator" onclick="window.scrollBy({top: window.innerHeight, behavior: 'smooth'})">
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
 
-    <section id="galeria" class="editorial-section">
-        <div class="editorial-bg-mural">
-            <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpKmDttK1678187511.jpg" class="editorial-mural-img" alt="Cliente Reisman">
-            <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpda7l171678187522.jpg" class="editorial-mural-img" alt="Cliente Reisman">
-            <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpfCTPeK1678187533.jpg" class="editorial-mural-img" alt="Cliente Reisman">
-            <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/php2G7Sh91678187544.jpg" class="editorial-mural-img" alt="Cliente Reisman">
-            <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phphOjX3Z1678187554.jpg" class="editorial-mural-img" alt="Cliente Reisman">
-            <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpIGMSvs1678187565.jpg" class="editorial-mural-img" alt="Cliente Reisman">
-            <img src="https://assets.betalabs.net/production/reisman/extra_fields/382/phpZamjk91729521031.jpg" class="editorial-mural-img" alt="Cliente Reisman">
-            <img src="https://assets.betalabs.net/production/reisman/extra_fields/381/phpeDuvtc1729521031.jpg" class="editorial-mural-img" alt="Cliente Reisman">
-            <img src="https://assets.betalabs.net/production/reisman/extra_fields/380/php6zgKp81729521472.png" class="editorial-mural-img" alt="Cliente Reisman">
-            <img src="https://assets.betalabs.net/production/reisman/extra_fields/380/phpjxIWon1729521601.jpg" class="editorial-mural-img" alt="Cliente Reisman">
-        </div>
-        <div class="editorial-overlay-box reveal">
-            <span style="letter-spacing: 2px; text-transform: uppercase; color: var(--gray-med); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 10px;">Social Media</span>
-            <h2 class="font-serif" style="font-size: 2rem; color: var(--black); margin-bottom: 20px; line-height: 1.2;">Você faz parte da nossa história</h2>
-            <p style="font-size: 0.95rem; color: var(--gray-dark); line-height: 1.7; margin-bottom: 35px;">
-                Cada joia carrega um sentimento único. Adoraríamos ver como o seu "para sempre" começou. <br>Compartilhe seu momento marcando <strong>@reisman_aliancas</strong>.
-            </p>
-            <a href="https://instagram.com/reisman_aliancas/tagged" target="_blank" class="btn-minimal-warranty" style="border-color: var(--black); color: var(--black);">
-                Ver Galeria de Clientes
-            </a>
-        </div>
-    </section>
-
     <section id="cuidados" class="care-section reveal">
         <div class="care-wrapper">
             <div class="care-image-col">
-                <div class="care-photo-frame">
-                    <img src="https://images.unsplash.com/photo-1615655406736-b37c4fabf923?q=80&w=600&auto=format&fit=crop" class="care-photo-img" alt="Cuidados Especiais">
-                </div>
+                <img src="https://assets.betalabs.net/production/reisman/extra_fields/272/php7b3nv71687784478.jpg?q=80&w=1200&auto=format&fit=crop" class="care-full-img" alt="Cuidados Especiais">
             </div>
             <div class="care-text-col">
+                <div class="care-watermark">Care</div>
                 <span style="letter-spacing: 2px; text-transform: uppercase; color: var(--gray-med); font-size: 0.8rem; font-weight: 600;">Manutenção</span>
                 <h2 class="font-serif" style="font-size: 2rem; color: var(--black); margin-bottom: 20px; margin-top: 10px; line-height: 1.2;">Cuidados Especiais</h2>
                 <p style="font-size: 0.95rem; color: var(--gray-dark); line-height: 1.7; margin-bottom: 30px;">
@@ -467,14 +523,20 @@
                 </p>
                 
                 <div class="care-tabs-list">
-                    <div class="care-list-item" onclick="openVideo('Q9gL52s1XKs')">
+                    <div class="care-list-item" onclick="openVideo('1r81jvevefI', true)">
                         <span>01. Limpeza em Casa</span>
                     </div>
-                    <div class="care-list-item" onclick="openVideo('lf7Wws_ok2Q')">
-                        <span>02. Dicas de Segurança</span>
+                    <div class="care-list-item" onclick="openVideo('lf7Wws_ok2Q', true)">
+                        <span>02. Dicas de Cuidados</span>
                     </div>
-                    <div class="care-list-item" onclick="openVideo('aIxgVqaXh9U')">
+                    <div class="care-list-item" onclick="openVideo('aIxgVqaXh9U', true)">
                         <span>03. Manutenção Ouro Branco</span>
+                    </div>
+                </div>
+                
+                <div class="care-mobile-photo reveal">
+                    <div class="care-photo-frame">
+                        <img src="https://assets.betalabs.net/production/reisman/extra_fields/272/php7b3nv71687784478.jpg?q=80&w=600&auto=format&fit=crop" class="care-photo-img" alt="Cuidados Especiais">
                     </div>
                 </div>
             </div>
@@ -484,27 +546,76 @@
     <section id="ajuste" class="measure-full-section reveal">
         <div class="measure-wrapper">
             <div class="measure-text-col">
-                <span style="letter-spacing: 2px; text-transform: uppercase; color: var(--gray-med); font-size: 0.8rem; font-weight: 600;">Suporte & Cuidado</span>
-                <h2 class="font-serif" style="font-size: 2rem; color: var(--black); margin-bottom: 20px; margin-top: 10px; line-height: 1.2;">O Ajuste Perfeito</h2>
-                <p style="font-size: 0.95rem; color: var(--gray-dark); line-height: 1.7; margin-bottom: 20px;">
-                    Garantimos que sua joia tenha o caimento ideal. O primeiro ajuste é gratuito no período de 1 ano. Assista ao vídeo para conferir como medir corretamente.
+                <div class="care-watermark">Measure</div>
+                <span style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; font-weight: 600;">Suporte & Cuidado</span>
+                <h2 class="font-serif" style="font-size: 2rem; margin-bottom: 20px; margin-top: 10px; line-height: 1.2;">A Medida Ideal</h2>
+                <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 30px;">
+                    Garantimos que sua joia tenha o ajuste perfeito. Assista ao vídeo para conferir como medir corretamente, ou entre em contato para que possamos te ajudar.
                 </p>
                 <div class="care-tabs-list">
-                    <a href="https://reisman.troque.app.br/" target="_blank" class="care-list-item" style="text-decoration: none;">
-                        <span>01. Solicitar Troca / Ajuste</span>
+                    <div class="care-list-item" onclick="openVideo('DKRAcdjVJ78', true)">
+                        <span><i class="fas fa-play" style="font-size: 0.7rem; margin-right: 10px; opacity: 0.7;"></i> Assistir Guia de Medição</span>
+                    </div>
+                    <a href="https://api.whatsapp.com/send?phone=5512991524367&text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20ajuste%20de%20medida" target="_blank" class="care-list-item" style="text-decoration: none;">
+                        <span><i class="fas fa-ruler" style="font-size: 0.7rem; margin-right: 10px; opacity: 0.7;"></i> Solicitar Ajuste de Medida</span>
                     </a>
-                    <div class="care-list-item" onclick="openVideo('Q9gL52s1XKs')">
-                        <span>02. Assistir Guia de Medição</span>
+                </div>
+                
+                <div class="care-mobile-photo reveal">
+                    <div class="care-photo-frame">
+                        <img src="https://assets.betalabs.net/production/reisman/extra_fields/272/phpknxenO1741809568.jpg?q=80&w=600&auto=format&fit=crop" class="care-photo-img" alt="Ajuste Perfeito">
                     </div>
                 </div>
             </div>
-            <div class="measure-video-col">
-                <div class="measure-photo-frame">
-                    <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=600&auto=format&fit=crop" class="measure-photo-img" alt="Ajuste Perfeito">
+            <div class="measure-image-col">
+                <img src="https://assets.betalabs.net/production/reisman/extra_fields/272/phpknxenO1741809568.jpg?q=80&w=1200&auto=format&fit=crop" class="measure-full-img" alt="Ajuste Perfeito">
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="editorial-section">
+        <div class="editorial-wrapper">
+            <div class="editorial-text-col">
+                <span style="letter-spacing: 2px; text-transform: uppercase; color: var(--gray-med); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 10px;">Social Media</span>
+                <h2 class="font-serif" style="font-size: 2.5rem; color: var(--black); margin-bottom: 20px; line-height: 1.2;">Você faz parte da nossa história</h2>
+                <p style="font-size: 1rem; color: var(--gray-dark); line-height: 1.7; margin-bottom: 35px;">
+                    Cada joia carrega um sentimento único. Adoraríamos ver como o seu "para sempre" começou. <br>Compartilhe seu momento marcando <strong>@reisman_aliancas</strong>.
+                </p>
+                <a href="https://instagram.com/reisman_aliancas/tagged" target="_blank" class="btn-gallery-cta">
+                    Ver Galeria de Clientes
+                </a>
+                <div class="gallery-stats">
+                    <div class="gallery-counter" data-target="10000">0</div>
+                    <span class="gallery-label">Histórias de Amor</span>
                 </div>
-                <svg class="signature-svg" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-                    <path class="signature-path" d="M20,60 C20,60 40,20 60,20 C80,20 70,50 60,50 C50,50 50,30 70,30 C90,30 100,60 110,60 C120,60 130,50 140,50 C150,50 160,60 170,60" />
-                </svg>
+            </div>
+            <div class="editorial-image-col">
+                <div class="gallery-marquee-col marquee-up">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpKmDttK1678187511.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpda7l171678187522.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpfCTPeK1678187533.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/php2G7Sh91678187544.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phphOjX3Z1678187554.jpg" alt="Cliente Reisman">
+                    <!-- Duplicate for Loop -->
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpKmDttK1678187511.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpda7l171678187522.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpfCTPeK1678187533.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/php2G7Sh91678187544.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phphOjX3Z1678187554.jpg" alt="Cliente Reisman">
+                </div>
+                <div class="gallery-marquee-col marquee-down">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpIGMSvs1678187565.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/382/phpZamjk91729521031.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/381/phpeDuvtc1729521031.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/380/php6zgKp81729521472.png" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/380/phpjxIWon1729521601.jpg" alt="Cliente Reisman">
+                    <!-- Duplicate for Loop -->
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/308/phpIGMSvs1678187565.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/382/phpZamjk91729521031.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/381/phpeDuvtc1729521031.jpg" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/380/php6zgKp81729521472.png" alt="Cliente Reisman">
+                    <img src="https://assets.betalabs.net/production/reisman/extra_fields/380/phpjxIWon1729521601.jpg" alt="Cliente Reisman">
+                </div>
             </div>
         </div>
     </section>
@@ -535,16 +646,16 @@
                 <img src="{{ path('logo-novo-preto.svg') }}" style="width: 100px; filter: brightness(0) invert(1); opacity: 0.3;" alt="Reisman">
             </div>
             <div style="opacity: 0.3; font-size: 0.7rem; letter-spacing: 1px;">
-                © 2026 Reisman Joalheiros. Todos os direitos reservados.
+                © 2026, REISMAN TODOS OS DIREITOS RESERVADOS CNPJ: 10.423.979/0001-64
             </div>
         </div>
     </div>
 
     <div class="scroll-dots-nav">
         <a href="#hero" class="scroll-dot active" title="Início"></a>
-        <a href="#galeria" class="scroll-dot" title="Galeria"></a>
         <a href="#cuidados" class="scroll-dot" title="Cuidados"></a>
         <a href="#ajuste" class="scroll-dot" title="Ajuste"></a>
+        <a href="#galeria" class="scroll-dot" title="Galeria"></a>
         <a href="#colecoes" class="scroll-dot" title="Coleções"></a>
     </div>
 
@@ -567,6 +678,12 @@
             }
             window.addEventListener("scroll", reveal); 
             reveal();
+            
+            // Hide Video Poster after load
+            setTimeout(function() {
+                var poster = document.querySelector('.video-poster');
+                if(poster) poster.classList.add('hidden');
+            }, 2500);
             
             // Scroll Dots Logic
             const sections = document.querySelectorAll('section, .nav-footer');
@@ -597,34 +714,89 @@
             backToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+
+            // Watermark Dynamic Opacity Effect
+            const watermarks = document.querySelectorAll('.care-watermark');
+            
+            if(watermarks.length > 0) {
+                window.addEventListener('scroll', () => {
+                    const windowHeight = window.innerHeight;
+                    
+                    watermarks.forEach(wm => {
+                        const section = wm.closest('section');
+                        if(section) {
+                            const rect = section.getBoundingClientRect();
+                            
+                            if (rect.top < windowHeight && rect.bottom > 0) {
+                                // Calculate progress based on center position
+                                const centerDist = Math.abs((rect.top + rect.height / 2) - (windowHeight / 2));
+                                const maxDist = (windowHeight / 2) + (rect.height / 2);
+                                const progress = Math.max(0, 1 - (centerDist / maxDist)); // 1 = center, 0 = edge
+                                
+                                // Vary opacity between 0.005 and 0.025
+                                wm.style.opacity = (0.005 + (progress * 0.02)).toFixed(3);
+                            }
+                        }
+                    });
+                });
+            }
+
+            // Gallery Counter Animation
+            const galleryStats = document.querySelector('.gallery-stats');
+            const galleryCounter = document.querySelector('.gallery-counter');
+            const editorialSection = document.querySelector('.editorial-section');
+            let counterAnimated = false;
+
+            if(galleryStats && galleryCounter) {
+                window.addEventListener('scroll', () => {
+                    const rect = galleryStats.getBoundingClientRect();
+                    
+                    // Background Transition
+                    if (editorialSection) {
+                        const sectionRect = editorialSection.getBoundingClientRect();
+                        if (sectionRect.top < window.innerHeight / 1.5 && sectionRect.bottom > window.innerHeight / 3) {
+                            editorialSection.classList.add('romantic-mode');
+                        } else {
+                            editorialSection.classList.remove('romantic-mode');
+                        }
+                    }
+
+                    if(rect.top < window.innerHeight && rect.bottom > 0 && !counterAnimated) {
+                        galleryStats.classList.add('visible');
+                        counterAnimated = true;
+                        galleryCounter.innerText = "10k+";
+                    }
+                });
+            }
         });
 
-        // Hero Video Audio Control
-        var heroVideoMuted = true;
-        function toggleHeroAudio(btn) {
-            var iframe = document.querySelector('.video-background-iframe');
-            var icon = btn.querySelector('i');
-            if(heroVideoMuted) {
-                iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-                icon.classList.remove('fa-volume-mute');
-                icon.classList.add('fa-volume-up');
-                heroVideoMuted = false;
-            } else {
-                iframe.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
-                icon.classList.remove('fa-volume-up');
-                icon.classList.add('fa-volume-mute');
-                heroVideoMuted = true;
-            }
-        }
-        
         // Generic Video Modal (Used by Measure Section)
-        function openVideo(videoId) { 
+        function openVideo(videoId, isShort) { 
             var modal = document.getElementById('videoModal'); 
             var iframe = document.getElementById('videoFrame'); 
-            // Autoplay on click
-            iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0&modestbranding=1"; 
+            var container = document.getElementById('videoContainer');
+            var wrapper = document.querySelector('#videoModal .modal-content-wrapper');
+
+            if (isShort) {
+                container.style.paddingBottom = '177.77%'; // 9:16 (Shorts)
+                wrapper.style.maxWidth = '400px';
+            } else {
+                container.style.paddingBottom = '56.25%'; // 16:9 (Standard)
+                wrapper.style.maxWidth = '800px';
+            }
+
+            // Native-like reproduction: Muted Autoplay + No Controls + Loop
+            // mute=1 is essential for autoplay to work reliably in modern browsers/modals
+            var params = "?autoplay=1&mute=1&controls=0&loop=1&playlist=" + videoId + "&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=0&disablekb=1&playsinline=1&enablejsapi=1";
+            iframe.src = "https://www.youtube.com/embed/" + videoId + params; 
+            
             modal.style.display = 'flex'; 
             document.body.style.overflow = 'hidden'; 
+            
+            // Reset Audio Icon
+            modalVideoMuted = true;
+            var icon = document.querySelector('#videoModal .video-audio-control i');
+            if(icon) icon.className = 'fas fa-volume-mute';
         }
         function closeVideo() { 
             var modal = document.getElementById('videoModal'); 
@@ -632,6 +804,22 @@
             iframe.src = ""; 
             modal.style.display = 'none'; 
             document.body.style.overflow = 'auto'; 
+        }
+        
+        // Modal Audio Control
+        var modalVideoMuted = true;
+        function toggleModalAudio(btn) {
+            var iframe = document.getElementById('videoFrame');
+            var icon = btn.querySelector('i');
+            if(modalVideoMuted) {
+                iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+                icon.className = 'fas fa-volume-up';
+                modalVideoMuted = false;
+            } else {
+                iframe.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
+                icon.className = 'fas fa-volume-mute';
+                modalVideoMuted = true;
+            }
         }
         
         // Warranty Modal
