@@ -6784,7 +6784,7 @@ ol li a, ol li a:hover {
     padding: 10px;
   }
   #desc-categoria {
-    padding: 1rem 10% 0;
+    padding: 0rem 10% 0;
   }
   .slider-blog a {
     padding: 0 3px;
@@ -7111,7 +7111,7 @@ a:hover {
 }
 
 #desc-categoria {
-  font-size: 15px;
+  font-size: 14px;
   opacity: 0.5;
   color: #000;
 }
@@ -15137,7 +15137,6 @@ header .aside-box .item.search {
 .product-block .description .preco-produto-spot .last::after, .product-block .description .preco-produto-spot1 .last::after {
   color: #727272 !important;
   content: "no pix" !important;
-  text-transform: uppercase !important;
   font-size: 11px !important;
   font-weight: 400 !important;
 }
@@ -15633,9 +15632,11 @@ ol.breadcrumb-new li::before {
 }
 
 div#title-categoria h1 {
-  font-size: 23px;
+  font-size: 32px;
   color: #000;
+  letter-spacing: 5px;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .product-block .img-card:hover img:nth-child(1) {
@@ -15823,4 +15824,578 @@ div#div-faq .title {
 }
 .fullbanner{
     height: 100vh;
+}
+.preco-produto-spot-price span.price-main {
+    color: #727272;
+    display: inline-flex; 
+    align-items: baseline; 
+    height: 25px;          
+    padding: 0px 10px 0px 3px;
+    line-height: normal;
+}
+
+.preco-produto-spot-price span.price-main span.currency,
+.preco-produto-spot-price span.price-main span.value,
+.preco-produto-spot-price span.price-main .currency-text {
+    background-color: transparent !important; 
+    display: inline;
+}
+
+.preco-produto-spot-price span.price-main span.currency {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.preco-produto-spot-price span.price-main span.value {
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.preco-produto-spot-price span.price-main .currency-text {
+    font-weight: 200;
+    letter-spacing: 1px;
+    margin-left: 4px;
+    font-size: 12px;
+    background-color: transparent !important;
+    display: inline-block;
+}
+
+body.page-categoria .retangulo {
+    display: none;
+}
+
+.preco-produto-spot-price .price-installment{
+      font-size: 14px;
+    color: #888;
+    font-weight: 300;
+    margin-top: -2px;
+    margin-bottom: 0 !important;
+}
+
+.page-abouts .banner-bloco-01 img{
+    width: 100%;
+}
+
+.page-abouts .banner-bloco-01{
+    position: relative;
+}
+
+.page-abouts .banner-bloco-01 .context-text{
+    position: absolute;
+    z-index: 1;
+    top: auto;
+    width: 100%;
+    bottom: 140px;
+    left: 67px;
+    text-align: left;
+}
+
+.page-abouts .banner-bloco-01 .context-text h2{
+    font-size: 39px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-family: "Magnificent", sans-serif;
+}
+
+.page-abouts .banner-bloco-01 .context-text p{
+    margin: 0;
+    font-size: 24.62px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.page-abouts .banner-bloco-02 {
+    padding-top: 87px;
+    padding-bottom: 157px;
+    text-align: center;
+}
+
+.page-abouts .banner-bloco-02 h3{
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #1E1613;
+    text-transform: uppercase;
+    font-family: "Magnificent", sans-serif;
+    margin-bottom: 24px;
+}
+
+.page-abouts .banner-bloco-02 span{
+    font-size: 20px;
+    font-weight: 400;
+    color: #727272;
+    font-family: Spectral, serif;
+}
+
+.page-abouts .banner-bloco-03 {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.page-abouts .banner-bloco-03 .context-text{
+    max-width: 459px;
+}
+
+.page-abouts h3{
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #1E1613;
+    text-transform: uppercase;
+    font-family: "Magnificent", sans-serif;
+    margin-bottom: 24px;
+}
+
+.page-abouts .banner-bloco-03 > div{
+    flex: 1;   
+}
+.page-abouts .banner-bloco-03 .context-img img{
+    margin-left: auto;
+}
+.page-abouts .banner-bloco-03 .context-text span{
+    font-size: 16px;
+    font-weight: 400;
+    color: #727272;
+    font-family: Spectral, serif;
+}
+@media screen and (max-width: 991px){
+    .page-abouts .banner-bloco-03{
+        flex-direction: column;
+    }
+}
+
+.page-abouts .banner-bloco-05,.page-abouts .banner-bloco-07 {
+    position: relative;
+    margin-top: 157px;
+    margin-bottom: 104px;
+     text-align: center;
+}
+
+.page-abouts .banner-bloco-05 .context-text,.page-abouts .banner-bloco-07 .context-text{
+    width: 100%;
+    max-width: 745px;
+    /*margin: auto;*/
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 39px;
+}
+.page-abouts .banner-bloco-05 .context-text span{
+    font-size: 16px;
+    font-weight: 400;
+    color: #727272;
+    font-family: Spectral, serif;
+    margin-bottom: 39px;
+}
+.page-abouts .banner-bloco-05 img{
+    margin: auto;
+}
+
+.page-abouts .banner-bloco-06{
+    display: flex;
+    background-color: #13100F;
+}
+
+.page-abouts .banner-bloco-06 > div{
+    flex: 1;
+  
+}
+
+.page-abouts .banner-bloco-06 .context-img{
+    order: -1;
+}
+
+.page-abouts .banner-bloco-06 .context-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.page-abouts .banner-bloco-06 .context-text .context{
+    max-width: 479px;
+    margin: auto;
+    color: #fff;
+}
+
+.page-abouts .banner-bloco-06 img{
+    width: 100%;
+}
+
+.page-abouts .banner-bloco-06 .context-text .context h3{
+
+    color: #FFFFFF;
+}
+
+.page-abouts .banner-bloco-07 .context-imgs{
+        display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.page-abouts .banner-bloco-07 .context-imgs img{
+    width: 100%;
+}
+
+.page-abouts .banner-bloco-07 .context-imgs figure{
+    position: relative;
+}
+
+.page-abouts .banner-bloco-07 .context-imgs figure span{
+    position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 100px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-family: "Magnificent", sans-serif;
+}
+.page-abouts .banner-bloco-07 .context-text span{
+    font-size: 16px;
+    font-weight: 400;
+    color: #727272;
+    font-family: Spectral, serif;
+    margin-bottom: 39px;
+}
+.banner-shop{
+    display: flex;
+}
+
+.banner-shop > div {
+    flex: 1;
+}
+.banner-shop .context-text .context span{
+      font-size: 16px;
+    font-weight: 400;
+    color: #727272;
+    font-family: Spectral, serif;
+
+}
+.banner-shop img{
+    width: 100%;
+}
+.banner-shop .context-text .context{
+    max-width: 459px;
+}
+
+
+.page-abouts .banner-bloco-01{
+    overflow: hidden;
+}
+@media screen and (max-width: 1054px){
+    .page-abouts .banner-bloco-02{
+        padding-top: 56px;
+        padding-bottom: 56px;
+    }
+    .page-abouts .context-text span{
+        font-size: 14px !important;
+    }
+    .page-abouts .banner-bloco-05 h3.title-bloco {
+        font-size: 20px;
+    }
+    .page-abouts .banner-bloco-05 .context-text span{
+        text-align: left;
+    }
+    .page-abouts .banner-bloco-02 span{
+        font-size: 14px;
+        text-align: left;
+    }
+    .page-abouts .banner-bloco-03{
+        flex-direction: column;
+        row-gap: 24px;
+    }
+    .page-abouts .banner-bloco-06{
+        flex-direction: column;
+    }
+    .page-abouts .banner-bloco-03 .context-text{
+        order: 2;
+    }
+    .page-abouts .banner-bloco-03 h3{
+        max-width: 85%;
+    }
+    .page-abouts .banner-bloco-06 .context-text{
+        padding: 55px;
+    }
+    .page-abouts .context-text{
+        max-width: 100% !important;
+    }
+    .page-abouts figure img{
+        width: 100% ;
+    }
+    .page-abouts h3{
+        text-align: left;
+        font-size: 18px;
+    }
+    .page-abouts .banner-bloco-02 h3{
+        font-size: 20px;
+        text-align: center;
+    }
+    .page-abouts .banner-bloco-05 .context-text{
+        text-align: left;
+    }
+    .page-abouts .banner-bloco-05 img,.page-abouts .banner-bloco-03 .context-img img,.banner-shop img{
+        border-radius: 4px;
+    }
+    .page-abouts .banner-bloco-07 h3.title-bloco{
+        text-align: center;
+    }
+    .page-abouts .banner-bloco-07 .context-text{
+        text-align: center !important;
+    }
+    .page-abouts .banner-bloco-07 .context-imgs{
+        grid-template-columns: repeat(1,1fr) !important;
+    }
+    .page-abouts .banner-bloco-07 .context-imgs figure span {
+        bottom: 40px;
+        font-size: 15px;
+    }
+    .banner-shop{
+        flex-direction: column;
+        row-gap: 24px;
+        display: flex;
+    }
+    .banner-shop .context-img{
+        order: -2;
+    }
+    .page-abouts .banner-bloco-01 .context-text p{
+        font-size: 18px;
+    }
+    .page-abouts .banner-bloco-01 .context-text h2{
+        font-size: 32px;
+    }
+}
+
+section.page-showroom .description-page{
+     font-size: 20px;
+    font-weight: 400;
+    color: #727272;
+    font-family: Spectral, serif;
+    border: none !important;
+    margin-top: 24px;
+}
+.page-showroom .banner-abouts{
+    display: flex;
+    gap: 53px;
+    align-items: center;
+}
+.page-showroom .banner-abouts .abouts-text .context-text{
+        font-size: 16px;
+    font-weight: 400;
+    color: #727272;
+    font-family: Spectral, serif;
+    border: none !important;
+    margin-bottom: 32px;
+}
+.page-showroom .banner-abouts .item-address p {
+    margin: 0;
+    color: #727272;
+    font-size: 16px;
+    max-width: 247px;
+}
+
+.page-showroom .banner-info .item-info .item-img {
+    height: 70px;
+        display: flex;
+    justify-content: center;
+}
+.page-showroom .banner-info .item-info{
+    max-width: 210px;
+}
+.page-showroom .banner-info .item-info small{
+    font-size: 12px;
+}
+.page-showroom .banner-info .item-info .item-name {
+    font-size: 16px;
+    color: #727272;
+    text-align: center;
+}
+
+.page-showroom .banner-info{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 120px;
+    margin-bottom: 130px;
+}
+
+.page-showroom .banner-abouts .info-abouts {
+    text-align: center;
+    max-width: 473px;
+    margin-top: 20px;
+    color: #727272;
+    font-size: 16px;
+}
+
+
+.page-showroom .banner-abouts .abouts-btn {
+    width: 100%;
+    max-width: 473px;
+    background: transparent;
+    border: 1px solid #1E1613;
+    text-align: center;
+    padding: 4px;
+    margin-top: 32px;
+        background: transparent;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #1E1613;
+}
+
+.page-showroom .banner-abouts .item-address {
+    display: flex;
+    gap: 17px;
+    align-items: baseline;
+}
+.page-showroom .banner-abouts .item-address h4 {
+    text-transform: uppercase;
+    font-family: "Magnificent", sans-serif;
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #1E1613;
+}
+
+.page-showroom .banner-abouts .abouts-address {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+}
+.page-showroom .banner-abouts > div {
+    flex: 1;
+}
+.page-showroom .text {
+    max-width: 742px;
+    margin: 80px auto 130px;
+}
+.page-showroom .text h2 {
+    color: #1E1613;
+    font-size: 32px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Magnificent,sans-serif;
+}
+.page-showroom .banner-abouts .abouts-img img {
+    width: 100%;
+}
+
+.page-showroom .page-fullbanner img{
+    width: 100%;
+}
+
+
+.page-showroom-modal .modal-content {
+    flex-direction: row;
+    padding: 110px 80px;
+    align-items: center;
+    gap: 49px;
+}
+
+.page-showroom-modal .modal-content > .div-text {
+    width: 40%;
+}
+.page-showroom-modal .modal-content > .div-form {
+    width: 60%;
+}
+
+.page-showroom-modal .modal-content > .div-text h3 {
+      font-size: 20px;
+    text-transform: uppercase;
+        font-family: Magnificent, sans-serif;
+     color: #1E1613;   
+     margin-bottom: 32px;
+}
+
+.page-showroom-modal .modal-content > .div-text .text , .page-showroom-modal .modal-content>.div-text .text h4{
+    color: #727272;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+@media screen and (min-width: 992px){
+  .page-showroom-modal .modal-content > .div-text {
+    order: 2
+  }
+}
+
+
+.page-showroom-modal form#form-agendamento-page .label{
+  flex: 0 0 48%;
+}
+
+.page-showroom-modal form#form-agendamento-page {
+      display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.page-showroom-modal .label-text {
+    flex: 1;
+}
+
+.form-control::placeholder {
+    font-size: 14px;
+    color: #727272;
+}
+
+.page-showroom-modal textarea.form-control{
+  height: 100px;
+}
+
+.page-showroom-modal label{
+  font-size: 14px;
+  color: #1e1613;
+  text-transform: uppercase;
+}
+
+.page-showroom-modal .form-control {
+    border-radius: 0;
+    border: 1px solid #DFDFDF;
+    margin-top: 14px;
+}
+
+.page-showroom-modal button.btn.btn-enviar-mensagem {
+    margin-top: 12px;
+    background: #fff;
+    border: 1px solid #1E1613;
+    color: #1E1613;
+    font-size: 14px;
+    padding: 6px;
+}
+
+@media screen and (max-width: 992px){
+  .page-showroom-modal .modal-content{
+    padding: 85px 24px 0;
+    flex-direction: column;
+     gap: 32px;
+  }
+  .page-showroom-modal .modal-content>.div-text,.page-showroom-modal .modal-content>.div-form{
+    width: 100%;
+  }
+    .page-showroom .banner-info{
+    flex-direction: column;
+    align-items: center;
+  }
+  .page-showroom .banner-abouts{
+    flex-direction: column;
+  }
+}
+  section.page-showroom .description-page {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.page-showroom-modal button.btn-close {
+    background: none;
+    top: 10px;
+    position: absolute;
+    right: 21px;
+}
+
+.page-showroom .banner-abouts .abouts-text h3 {
+    color: #1E1613;
+    font-size: 32px;
+    text-transform: uppercase;
+    font-family: "Magnificent", sans-serif;
+    margin-bottom: 24px;
 }
