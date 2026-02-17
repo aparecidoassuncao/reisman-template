@@ -1,5 +1,5 @@
 @if(!request()->ajax())
-@extends(engine_view('base'))
+@extends(engine_view('base-novo'))
 @section('conteudo')
 @section('title', 'Resultado da busca')
 
@@ -14,7 +14,7 @@
     @if($searchResult->items->isNotEmpty())
       @foreach($searchResult->items as $item)
       @if($item->prices->first()->price > 0)
-        <div class="col-lg-3 col-sm-12 coluna-spot-search">
+        <div class="col-lg-3 col-sm-12 coluna-spot-search card-search">
           @include(engine_view('produto-item-novo'))
         </div>
       @endif
